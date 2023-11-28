@@ -2,21 +2,31 @@ const router = require('express').Router()
 const regc = require('../controllers/regcontroller');
 const productc = require('../controllers/productcontroller');
 const upload = require('../helper/multer');
+const jwt = require('jsonwebtoken');
 
-router.post('/reg',regc.register)
-router.post('/login',regc.loginCheck)
+const verifyToken = (req, res, next) => {
+    const authorizationHeader = req.headers['authorization'];
+    const token = authorizationHeader.split(' ')[1];
+    
+    if(jwt.verify(token, process.env.JWT_KEY)){
+        next()
+    }
+};
 
-router.post('/addData',upload.single('image'),productc.addFormData)
-router.get('/allData',productc.allData)
-router.get('/singleData/:id',productc.updateSingleData)
-router.put('/updateProducts/:id',upload.single('img'),productc.updateProducts)
+router.post('/reg', verifyToken, regc.register)
+router.post('/login', regc.loginCheck)
 
-router.get('/produstInStock',productc.produstInStock)
+router.post('/addData', upload.single('image'), productc.addFormData)
+router.get('/allData', productc.allData)
+router.get('/singleData/:id', productc.updateSingleData)
+router.put('/updateProducts/:id', upload.single('img'), productc.updateProducts)
 
-router.post('/cart',productc.cart)
+router.get('/produstInStock', productc.produstInStock)
 
-router.post('/cartData/:userName',productc.cartData)
+router.post('/cart', productc.cart)
 
-router.get('/myorders/:userName',productc.myOrders)
+router.post('/cartData/:userName', productc.cartData)
 
-module.exports=router
+router.get('/myorders/:userName', productc.myOrders)
+
+module.exports = router

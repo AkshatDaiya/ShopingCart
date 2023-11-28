@@ -1,6 +1,6 @@
 const Reg = require('../models/reg');
 const bcrypt = require('bcrypt');
-
+const jwt = require('jsonwebtoken');
 
 
 exports.register = async (req, res) => {
@@ -37,10 +37,12 @@ exports.loginCheck = async (req, res) => {
         const record = await Reg.findOne({ username: username })
         if (record !== null) {
             const cpass = await bcrypt.compare(password, record.password)
+            const token = jwt.sign({ record }, process.env.JWT_KEY, { expiresIn: '4h' })
             if (cpass) {
                 res.status(200).json({
                     status: 200,
-                    apiData: record.username
+                    apiData: record.username,
+                    token:token
                 })
             } else {
                 res.status(400).json({

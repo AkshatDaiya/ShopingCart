@@ -2,6 +2,7 @@ import { useContext, useLayoutEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ContextApi } from "./ContextApi";
 
+
 function Login() {
     let navigate = useNavigate()
 
@@ -14,16 +15,18 @@ function Login() {
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [message, setMessage] = useState('')
+    const [token, setToken] = useState(localStorage.getItem('token'))
 
     function handleSubmit(e) {
         e.preventDefault()
         const record = { username, password }
         fetch('/api/login', {
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", "Autherization": `Bearer ${token} ` },
             body: JSON.stringify(record)
         }).then((result) => { return result.json() }).then((data) => {
             if (data.status === 200) {
+                localStorage.setItem('token', data.token)
                 if (data.apiData === 'Admin') {
                     localStorage.setItem('loginName', data.apiData)
                     setLoginName(localStorage.getItem('loginName'))

@@ -1,8 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ProductStrc from "./ProductStrc";
+import { ContextApi } from "./ContextApi";
+import { useNavigate } from "react-router-dom";
 
 function Products() {
     const [products, setProducts] = useState([])
+    const{loginName}=useContext(ContextApi)
+    const navigate = useNavigate();
+
+    if(!loginName){
+        navigate('/');
+    }
 
     useEffect(() => {
         fetch('/api/produstInStock').then((result) => { return result.json() }).then((data) => {
