@@ -27,8 +27,7 @@ function AdminProduct() {
             <section id="mid">
                 <div className="container">
                     <div className="row">
-                        <Left />
-                        <div className="col-md-10">
+                        <div className="col-md-12">
                             <h3 className="text-center">Product Managemants</h3>
                             <h5 className="text-center">{message}</h5>
                             <Link to='/addproduct'><button className="btn btn-info my-3 form-control"><h6>Add More Product</h6></button></Link>

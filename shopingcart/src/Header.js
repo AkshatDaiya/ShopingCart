@@ -13,10 +13,6 @@ function Header() {
         navigate('/')
     }
 
-    function handlecartForm(e) {
-
-    }
-
     return (<>
         {loginName ?
             <section id="header">
@@ -26,11 +22,18 @@ function Header() {
                         <div className="col-md-8">
                             <button className="logOutBtn btn btn-danger" onClick={(e) => { handleLogOut(e) }}>LogOut</button>
 
-                            <Link to="/cart"><button className="logOutBtn btn btn-success mx-2" onClick={(e) => { handlecartForm(e) }}>Cart {!cart.totalItems ? 0 : cart.totalItems}</button></Link>
+                            <Link to="/cart"><button className="logOutBtn btn btn-success mx-2">Cart {!cart.totalItems ? 0 : cart.totalItems}</button></Link>
 
                             <Link to="/products"><button className="logOutBtn btn btn-success">Products</button></Link>
 
                             <Link to="/myorders"><button className="logOutBtn btn btn-success mx-2">MyOrders</button></Link>
+
+                            {loginName === "Admin" ?
+                                <Link to="/adminproduct"><button className="logOutBtn btn btn-success mx-2">Add Product</button></Link>
+                                :
+                                <></>
+                            }
+
 
                         </div>
                     </div>

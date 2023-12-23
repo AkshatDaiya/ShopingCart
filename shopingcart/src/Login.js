@@ -31,7 +31,7 @@ function Login() {
                     localStorage.setItem('loginName', data.apiData)
                     setLoginName(localStorage.getItem('loginName'))
 
-                    navigate('/dashboard')
+                    navigate('/adminproduct')
                 } else {
                     localStorage.setItem('loginName', data.apiData)
                     setLoginName(localStorage.getItem('loginName'))
