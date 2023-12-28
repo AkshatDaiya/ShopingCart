@@ -3,17 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { ContextApi } from "./ContextApi";
 
 function Cart() {
-    const { cart, setCart,loginName } = useContext(ContextApi)
+    const { cart, setCart, loginName } = useContext(ContextApi)
     const [cartData, setCartData] = useState([])
     const navigate = useNavigate()
 
-    if(!loginName){
+    if (!loginName) {
         navigate('/')
     }
 
     let totalAmount = 0
     useEffect(() => {
-        if(!cart.items){
+        if (!cart.items) {
             return
         }
         fetch('/api/cart', {
