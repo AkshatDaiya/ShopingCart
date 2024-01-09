@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 
 function Addproduct() {
     const navigate = useNavigate()
-    const {loginName } = useContext(ContextApi)
+    const { loginName } = useContext(ContextApi)
 
-    if(!loginName){
+    if (!loginName) {
         navigate('/')
     }
 
@@ -34,9 +34,9 @@ function Addproduct() {
             method: 'POST',
             body: formValues
         }).then((result) => { return result.json() }).then((data) => {
-            if(data.status===201){
+            if (data.status === 201) {
                 setMessage(data.message)
-            }else{
+            } else {
                 setMessage(data.message)
             }
         })

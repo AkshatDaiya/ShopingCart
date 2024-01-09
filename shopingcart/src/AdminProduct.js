@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import Left from "./Left";
 import { useContext, useEffect, useState } from "react";
 import { ContextApi } from "./ContextApi";
 
@@ -58,7 +57,7 @@ function AdminProduct() {
                                             <td>{result.qty}</td>
                                             <td>{result.status}</td>
                                             <td>{result.postedDate}</td>
-                                            <td><Link to={`/addproduct/${result._id}`}><button className="btn btn-warning">Update</button></Link></td>
+                                            <td><Link to={`/updateproduct/${result._id}`}><button className="btn btn-warning">Update</button></Link></td>
                                         </tr>
                                     ))}
                                 </tbody>
